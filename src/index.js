@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux'
-import quantityReducer from './reducers/quantityReducer'
+import quantityReducer from './reducers/quantityReducer.js'
+import priceReducer from './reducers/priceReducer.js'
 
-const store = createStore(quantityReducer);
+const rootReducer = combineReducers({quantity: quantityReducer, price: priceReducer});
+const store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>
