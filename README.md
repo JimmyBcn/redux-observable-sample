@@ -9,14 +9,14 @@ You can take an introduction to Reactive Programming by reading [this awesome ar
  
 ## Samples
 ### Separation of concerns
-Redux-thunk is the _de facto_ middleware used for managing asynchronous logic in Redux. However, when you start adding many concerns into an action, your logic becomes difficult to untangle. You want a better way of decoupling concerns that need to be kicked off at a moment in time. Meaning, you would want to embrace an event sourcing over a command pattern. The one approach is reactive, the other is imperative. 
+Redux-thunk is the _de facto_ middleware used for managing asynchronous logic in Redux. However, as you start adding multiple concerns into an action, your logic becomes difficult to untanglefollow, mantain and reason about. You then might think on decoupling concerns that need to be kicked off at a moment in time. Meaning, you would want to embrace event sourcing (reactive style) over command pattern (imperative style).
 In this sample, _quantity_ does not instruct anything in regards to _price_, because it is not its concern. However, _price_ reacts to changes in _quantity_.
 
 ### Buffer (playing with operators, sample I)
 RxJs provide [tens of operators](https://www.learnrxjs.io/operators/). This sample plays with _scan_ and _buffer_. It also makes use of the _state$_ stream to access the state from an epic.
 
-### Managing async effects (comming soon)
-We can execute async code when reacting to an action in the epic. We just have to receive a promise for that.
+### Managing async logic
+What also makes redux-observable so interesting is the ability to use RxJS' mergeMap() function to handle asynchronous functions. We can execute async code when reacting to an action in the epic. We just have to receive a promise for that. This is the very basic sample that shows it.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
