@@ -4,13 +4,9 @@ import { connect } from 'react-redux'
 import Soc from './components/soc.js'
 import Catch from './components/catch.js'
 import Async from './components/async.js'
+import AsyncCancel from './components/asyncCancel.js'
 import Buffer from './components/buffer.js'
-
-// TODO: Promise advanced (cancellation):https://github.com/redux-observable/redux-observable/blob/master/examples/redux-observable-cancellable-counter/js/epics/index.js
-// TODO: Using catch: https://github.com/redux-observable/redux-observable/blob/master/examples/redux-observable-shopping-cart/js/epics/index.js
-// TODO: introducing side-effects on an epic
-// TODO: API Call with cancellation
-// TODO: Jest unit tests
+import ApiCall from './components/apiCall';
 
 class App extends Component {
   render() {
@@ -19,7 +15,9 @@ class App extends Component {
         <Soc />
         <Catch />
         <Async />
+        <AsyncCancel />
         <Buffer />
+        <ApiCall />
       </div>
     );
   }

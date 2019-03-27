@@ -10,7 +10,7 @@ const executeAsyncCodeThatMayThrowAnError = throwError => {
     }
     setTimeout(() => {
       resolve("Aysnc logic finished succesfully!")
-    }, 5000)
+    }, 2000)
   });
 }
 
@@ -18,7 +18,7 @@ export const asyncEpic = action$ => action$.pipe(
   ofType(START_ASYNC_LOGIC),
   mergeMap(action =>
     of(action).pipe(
-      mergeMap(action => executeAsyncCodeThatMayThrowAnError(action.throwError)),
+      mergeMap(async action => await executeAsyncCodeThatMayThrowAnError(action.throwError)),
       catchError(err => {
         console.log("Caught Error " + err.message + ", continuing");
         return of(err.message)

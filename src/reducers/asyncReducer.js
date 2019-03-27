@@ -1,4 +1,4 @@
-import { START_ASYNC_LOGIC, ASYNC_LOGIC_FINISHED } from '../actions/asyncActions'
+import { ASYNC_LOGIC_FINISHED } from '../actions/asyncActions'
 
 const initialState = {
   asyncLogicFinished: '',

@@ -4,7 +4,7 @@ import Header from './header.js'
 
 import { startCancellableAsyncLogic, cancelAsyncLogic } from '../actions/asyncCancelActions'
 
-class Async extends React.Component {
+class AsyncCancel extends React.Component {
 
   render() {
     return (
@@ -26,7 +26,7 @@ class Async extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    cancellableAsyncLogicFinished: state.async.cancellableAsyncLogicFinished,
+    cancellableAsyncLogicFinished: state.asyncCancel.cancellableAsyncLogicFinished,
   };
 }
 
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Async);
+export default connect(mapStateToProps, mapDispatchToProps)(AsyncCancel);
