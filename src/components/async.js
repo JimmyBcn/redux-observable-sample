@@ -12,8 +12,8 @@ class Async extends React.Component {
         <Header title="Handle async logic" description="RxJS' mergeMap() operator kindly handles asynchronous functions"/>
         <div className="content">
           <div className="inline">
-            <button type="button" onClick={this.props.startAsyncLogic(true)}>Start async logic</button>
-            <button type="button" onClick={this.props.startAsyncLogic(false)}>Start failing async logic</button>
+            <button type="button" onClick={this.props.startAsyncLogic(false)}>Start async logic</button>
+            <button type="button" onClick={this.props.startAsyncLogic(true)}>Start failing async logic</button>
           </div>
           <div className="jumpline">
           Result: {this.props.asyncLogicFinished}
@@ -31,9 +31,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startAsyncLogic(asyncLogicSuccess) {
+  startAsyncLogic(throwError) {
     return () => {
-      dispatch(startAsyncLogic(asyncLogicSuccess));
+      dispatch(startAsyncLogic(throwError));
     }
   }
 });

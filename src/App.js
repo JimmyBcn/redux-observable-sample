@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
 import Soc from './components/soc.js'
-import Buffer from './components/buffer.js'
+import Catch from './components/catch.js'
 import Async from './components/async.js'
+import Buffer from './components/buffer.js'
 
 // TODO: Promise advanced (cancellation):https://github.com/redux-observable/redux-observable/blob/master/examples/redux-observable-cancellable-counter/js/epics/index.js
 // TODO: Using catch: https://github.com/redux-observable/redux-observable/blob/master/examples/redux-observable-shopping-cart/js/epics/index.js
@@ -16,8 +17,9 @@ class App extends Component {
     return (
       <div className="App">
         <Soc />
-        <Buffer />
+        <Catch />
         <Async />
+        <Buffer />
       </div>
     );
   }

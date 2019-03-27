@@ -11,16 +11,20 @@ import quantityReducer from './reducers/quantityReducer.js'
 import priceReducer from './reducers/priceReducer.js'
 import { priceEpic } from './epics/priceEpic.js';
 
-// Buffer sample
-import bufferReducer from './reducers/bufferReducer.js'
-import { bufferEpic } from './epics/bufferEpic';
+// Catch sample
+import catchReducer from './reducers/catchReducer.js'
+import { catchEpic } from './epics/catchEpic';
 
 // Async sample 
 import asyncReducer from './reducers/asyncReducer.js'
 import { asyncEpic } from './epics/asyncEpic.js';
 
-const rootReducer = combineReducers({quantity: quantityReducer, price: priceReducer, buffer: bufferReducer, async: asyncReducer});
-const rootEpic = combineEpics(priceEpic, bufferEpic, asyncEpic)
+// Buffer sample
+import bufferReducer from './reducers/bufferReducer.js'
+import { bufferEpic } from './epics/bufferEpic';
+
+const rootReducer = combineReducers({quantity: quantityReducer, price: priceReducer, catch: catchReducer, async: asyncReducer, buffer: bufferReducer});
+const rootEpic = combineEpics(priceEpic, catchEpic, asyncEpic, bufferEpic)
 const epicMiddleware = createEpicMiddleware();
 const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
 epicMiddleware.run(rootEpic);

@@ -1,17 +1,29 @@
 import { ofType } from 'redux-observable';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 import { START_ASYNC_LOGIC, showAsyncIsFinished } from '../actions/asyncActions'
+
+const executeAsyncCodeThatMayThrowAnError = throwError => {
+  return new Promise((resolve, reject) => {
+    if (throwError) {
+      reject(new Error("An error ocurred while executing async logic!"))
+    }
+    setTimeout(() => {
+      resolve("Aysnc logic finished succesfully!")
+    }, 5000)
+  });
+}
 
 export const asyncEpic = action$ => action$.pipe(
   ofType(START_ASYNC_LOGIC),
-  mergeMap(async action => { 
-    if (action.asyncLogicSuccess) {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      return showAsyncIsFinished("Aysnc logic finished succesfully!");
-    }
-    else {
-      throw new Error('An error ocurred while executing async logic!');
-    }
-  }),
-  catchError(err => Promise.resolve(showAsyncIsFinished(err.message)))
+  mergeMap(action =>
+    of(action).pipe(
+      mergeMap(action => executeAsyncCodeThatMayThrowAnError(action.throwError)),
+      catchError(err => {
+        console.log("Caught Error " + err.message + ", continuing");
+        return of(err.message)
+      }),
+      map(result => showAsyncIsFinished(result))
+    )
+  )
 )
