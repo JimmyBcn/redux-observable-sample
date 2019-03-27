@@ -10,6 +10,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Redux-observable</h1>
+        <img src="https://raw.githubusercontent.com/redux-observable/redux-observable/HEAD/logo/logo-small.gif"/>
+        <h3>Embrace Reactive Programming in your redux applications to empower Separation Of Concerns and improve your async code management</h3>
         <Soc />
         <Async />
         <ApiCall />
