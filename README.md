@@ -1,3 +1,5 @@
+![Logo](https://raw.githubusercontent.com/redux-observable/redux-observable/HEAD/logo/logo-small.gif)
+
 # Go reactive with redux-observable and RxJS
 This repository contains a set of samples that shows how [Redux-Observable](https://redux-observable.js.org/) and 
 [RxJS](https://rxjs-dev.firebaseapp.com/) can help you to take a reactive approach when buiding React applications. This not only helps in providing a better overall design (as it makes separation of concerns easier), but also improves other ways of managing async code in Redux.
@@ -17,6 +19,7 @@ What also makes redux-observable so interesting is the ability to handle asynchr
 
 ### Buffer (playing with operators, sample I)
 RxJs provide [tens of operators](https://www.learnrxjs.io/operators/). This sample plays with _scan_ and _buffer_. It also makes use of the _state$_ stream to access the state from an epic.
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
