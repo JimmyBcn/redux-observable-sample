@@ -14,7 +14,7 @@ class ApiCall extends React.Component {
           <div className="inline">
             <button type="button" onClick={this.props.apiCall('https://api.ipify.org?format=json')}>Call success api</button>
             <button type="button" onClick={this.props.apiCall('http://1.cuzillion.com/bin/resource.cgi?sleep=1')}>Call error api</button>
-            <button type="button" onClick={this.props.apiCall('http://1.cuzillion.com/bin/resource.cgi?sleep=5')}>Call long running api</button>
+            <button type="button" onClick={this.props.apiCall('http://1.cuzillion.com/bin/resource.cgi?sleep=5')}>Call long running api (5 secs)</button>
             <button type="button" onClick={this.props.cancelApiCall()}>Cancel long running call</button>
           </div>
           <div className="jumpline">

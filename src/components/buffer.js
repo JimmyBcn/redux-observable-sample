@@ -9,7 +9,7 @@ class Buffer extends React.Component {
   render() {
     return (
       <div className="sample">
-        <Header title="Buffer operator" description="RxJS operators can help in many ways"/>
+        <Header title="Buffer operator" description="RxJS operators can help in many ways and solve really challenging problems with much less code"/>
         <div className="content">
           <div className="jumpline">
             <button type="button" onClick={this.props.addClick()}>Add click to buffer</button>

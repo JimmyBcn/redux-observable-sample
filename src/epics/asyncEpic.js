@@ -1,29 +1,29 @@
 import { ofType } from 'redux-observable';
-import { of } from 'rxjs';
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { START_ASYNC_LOGIC, showAsyncIsFinished } from '../actions/asyncActions'
+import { of, from } from 'rxjs';
+import { mergeMap, map, catchError, race } from 'rxjs/operators';
+import { START_ASYNC_LOGIC, CANCEL_ASYNC_LOGIC, showAsyncIsFinished } from '../actions/asyncActions'
 
-const executeAsyncCodeThatMayThrowAnError = throwError => {
+const asyncOperation = error => {
   return new Promise((resolve, reject) => {
-    if (throwError) {
-      reject(new Error("An error ocurred while executing async logic!"))
+    if (error) {
+      reject("An error ocurred while executing async logic!")
     }
-    setTimeout(() => {
-      resolve("Aysnc logic finished succesfully!")
-    }, 2000)
+    setTimeout(() => resolve("Async operation finished!"), 5000)
   });
 }
 
+// When epics execute code that throws an error, the sequence that they are providing is completed, so they don't emmit any other value
 export const asyncEpic = action$ => action$.pipe(
   ofType(START_ASYNC_LOGIC),
-  mergeMap(action =>
-    of(action).pipe(
-      mergeMap(async action => await executeAsyncCodeThatMayThrowAnError(action.throwError)),
-      catchError(err => {
-        console.log("Caught Error " + err.message + ", continuing");
-        return of(err.message)
-      }),
-      map(result => showAsyncIsFinished(result))
-    )
-  )
-)
+  mergeMap(action => of(action).pipe( // This technique is commonly called "isolating your observer chains"
+    mergeMap(action => from(asyncOperation(action.throwError)).pipe( // The "from" method is really smart as it resolves the promises before creating the observable
+      map(response => response))
+    ),
+    catchError(err => { return of(err) }),  // Errors while executing the "mergeMap" code are catched by the "catchError" operator.
+    race(action$.pipe( // With the "race" operator we can chain observables, and the one who emits first wins, the other are unsubscribed
+      ofType(CANCEL_ASYNC_LOGIC),
+      map(action => "Async logic has been canceled!")
+    )))
+  ),
+  map(response => showAsyncIsFinished(response))
+);

@@ -11,29 +11,20 @@ import quantityReducer from './reducers/quantityReducer.js'
 import priceReducer from './reducers/priceReducer.js'
 import { priceEpic } from './epics/priceEpic.js';
 
-// Catch sample
-import catchReducer from './reducers/catchReducer.js'
-import { catchEpic } from './epics/catchEpic';
-
 // Async sample 
 import asyncReducer from './reducers/asyncReducer.js'
 import { asyncEpic } from './epics/asyncEpic.js';
-
-// Cancellable async sample 
-import asyncCancelReducer from './reducers/asyncCancelReducer.js'
-import { asyncCancelEpic } from './epics/asyncCancelEpic.js';
-
-// Buffer sample
-import bufferReducer from './reducers/bufferReducer.js'
-import { bufferEpic } from './epics/bufferEpic';
 
 // Api call sample
 import apiCallReducer from './reducers/apiCallReducer.js'
 import { apiCallEpic } from './epics/apiCallEpic';
 
-const rootReducer = combineReducers({quantity: quantityReducer, price: priceReducer, catch: catchReducer, 
-  async: asyncReducer, asyncCancel: asyncCancelReducer, buffer: bufferReducer, apiCall: apiCallReducer});
-const rootEpic = combineEpics(priceEpic, catchEpic, asyncEpic, asyncCancelEpic, bufferEpic, apiCallEpic)
+// Buffer sample
+import bufferReducer from './reducers/bufferReducer.js'
+import { bufferEpic } from './epics/bufferEpic';
+
+const rootReducer = combineReducers({quantity: quantityReducer, price: priceReducer, async: asyncReducer, apiCall: apiCallReducer, buffer: bufferReducer });
+const rootEpic = combineEpics(priceEpic, asyncEpic, apiCallEpic, bufferEpic)
 const epicMiddleware = createEpicMiddleware();
 const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
 epicMiddleware.run(rootEpic);

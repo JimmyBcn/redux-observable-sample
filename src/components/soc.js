@@ -9,7 +9,7 @@ class Soc extends React.Component {
   render() {
     return (
       <div className="sample">
-        <Header title="Separation of concerns" description="Use a reactive style to decouple concerns"/>
+        <Header title="Separation of concerns" description="Use a reactive style to easily decouple concerns"/>
         <div className="content">
           <div className="inline">
             Quantity: {this.props.quantity}  
